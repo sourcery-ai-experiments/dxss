@@ -22,7 +22,7 @@ dependencies = [
     "fenics-ufl",
     "numpy",
 ]
-description = "Collection of helper functions for working with DOLFINx Python interface"
+description = "DOLFINx solvers on space-time finite element spaces"
 dynamic = [
     "version",
 ]
