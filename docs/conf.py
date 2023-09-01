@@ -31,7 +31,6 @@ python_use_unqualified_type_names = True
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "numpy": ("https://numpy.org/doc/stable/", None),
-    "matplotlib": ("https://matplotlib.org/stable/", None),
     "dolfinx": ("https://docs.fenicsproject.org/dolfinx/main/python", None),
     "ufl": ("https://fenics.readthedocs.io/projects/ufl/en/stable/", None),
 }
