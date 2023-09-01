@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "dxh"
+project = "dxss"
 copyright = "2023, University College London"  # noqa: A001
 author = "University College London"
 release = "0.1.0"
