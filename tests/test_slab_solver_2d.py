@@ -19,10 +19,10 @@ from dxss.space_time import (
 )
 
 try:
-    import pypardiso
-
+    import pypardiso  # fmt: skip
     SOLVER_TYPE = "pypardiso"
 except ImportError:
+    pypardiso = None
     SOLVER_TYPE = "petsc-LU"
 
 sys.setrecursionlimit(10**6)

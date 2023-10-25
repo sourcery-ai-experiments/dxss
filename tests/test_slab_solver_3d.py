@@ -3,6 +3,7 @@ import time
 from math import pi, sqrt
 
 import numpy as np
+import pytest
 import scipy.sparse as sp
 import ufl
 from dolfinx.mesh import CellType, GhostMode, create_box
@@ -18,10 +19,10 @@ from dxss.space_time import (
 )
 
 try:
-    import pypardiso
-
+    import pypardiso  # fmt: skip
     SOLVER_TYPE = "pypardiso"
 except ImportError:
+    pypardiso = None
     SOLVER_TYPE = "petsc-LU"
 
 sys.setrecursionlimit(10**6)
@@ -138,7 +139,8 @@ ST.setup_spacetime_finite_elements()
 ST.prepare_precondition_gmres()
 
 
-def test_slab_problem():
+@pytest.mark.skipif(pypardiso is None, reason="PyPardiso not installed.")
+def test_3d_slab_problem_pardiso():
     # matrix for linear systems on the slabs
     slab_matrix = ST.get_slab_matrix()
 
@@ -150,15 +152,31 @@ def test_slab_problem():
 
     start = time.time()
 
-    if SOLVER_TYPE == "pypardiso":
-        pardiso_solver = PySolver(get_sparse_matrix(slab_matrix))
-        pardiso_solver.solve(x_out, x_comp)
-    elif SOLVER_TYPE == "petsc-LU":
-        solver_slab = get_lu_solver(ST.msh, ST.get_slab_matrix())  # LU-decomposition
-        solver_slab.solve(x_out, x_comp)
-    else:
-        msg = "invalid solver_type"
-        raise ValueError(msg)
+    pardiso_solver = PySolver(get_sparse_matrix(slab_matrix))
+    pardiso_solver.solve(x_out, x_comp)
+
+    end = time.time()
+    error = np.linalg.norm(x_comp.array - x_in.array)
+    print("Error = ", error)
+    print("elapsed time = " + str(end - start) + " seconds")
+
+    assert error < 1e-4
+
+
+def test_3d_slab_problem_petsc_lu():
+    # matrix for linear systems on the slabs
+    slab_matrix = ST.get_slab_matrix()
+
+    # generate solution
+    x_in, x_out = slab_matrix.createVecs()
+    x_comp, _ = slab_matrix.createVecs()
+    x_in.array[:] = np.random.default_rng().random(len(x_in.array))
+    slab_matrix.mult(x_in, x_out)
+
+    start = time.time()
+
+    solver_slab = get_lu_solver(ST.msh, ST.get_slab_matrix())  # LU-decomposition
+    solver_slab.solve(x_out, x_comp)
 
     end = time.time()
     error = np.linalg.norm(x_comp.array - x_in.array)
