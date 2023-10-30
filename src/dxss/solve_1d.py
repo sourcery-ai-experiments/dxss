@@ -125,7 +125,12 @@ b_rhs = ST.get_spacetime_rhs()
 # Prepare coarse grid correction
 
 
-def solve_problem(measure_errors=False):
+def solve_problem(measure_errors: bool = False) -> tuple[np.ndarray, np.ndarray]:
+    """Main steering function to solve the 1D problem.
+
+    Args:
+        measure_errors: Whether to calculate the errors.
+    """
     start = time.time()
     if SOLVER_TYPE == "pypardiso":
         genreal_slab_solver = pypardiso.PyPardisoSolver()
@@ -177,6 +182,8 @@ def solve_problem(measure_errors=False):
 
     if measure_errors:
         ST.measured_errors(u_sol)
+
+    return u_sol.getArray(readonly=True), res
 
 
 if __name__ == "__main__":
