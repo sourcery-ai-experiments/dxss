@@ -17,7 +17,7 @@ GM = GhostMode.shared_facet
 eta = 0.6
 
 
-def _create_mesh(mesh, cell_type, prune_z=False):
+def _create_mesh(mesh, cell_type: str, prune_z: bool = False) -> meshio.Mesh:
     cells = mesh.get_cells_type(cell_type)
     cell_data = mesh.get_cell_data("gmsh:physical", cell_type)
     points = mesh.points[:, :2] if prune_z else mesh.points
