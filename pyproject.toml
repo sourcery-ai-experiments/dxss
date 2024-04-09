@@ -179,6 +179,7 @@ python =
 [testenv]
 conda_deps =
     fenics-dolfinx==0.6.0
+    test-py{39,310}-pardiso: pypardiso
     fenics-ufl
     gmsh
     h5py
@@ -187,13 +188,12 @@ conda_deps =
     mpi4py
     numpy
     petsc4py
-    pypardiso
     scipy
     sympy
 conda_channels =
     conda-forge
 
-[testenv:test-py{39,310}]
+[testenv:test-py{39,310}-{petsc,pardiso}]
 commands =
     pytest -s --cov --cov-report=xml
 deps =
@@ -212,8 +212,10 @@ deps =
 
 [tox]
 envlist =
-    test-py39
-    test-py310
+    test-py39-pardiso
+    test-py310-pardiso
+    test-py39-petsc
+    test-py310-petsc
 isolated_build = true
 requires = tox-conda
 """
