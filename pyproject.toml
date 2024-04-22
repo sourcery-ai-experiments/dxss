@@ -154,6 +154,7 @@ python =
 conda_deps =
     dolfinx06: fenics-dolfinx==0.6
     dolfinx07: fenics-dolfinx==0.7
+    docs: fenics-dolfinx==0.7
 conda_channels =
     conda-forge
 
