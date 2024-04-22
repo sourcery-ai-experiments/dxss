@@ -367,10 +367,9 @@ document.write(`
 
 
 <div class="viewcode-block" id="SpaceTime"><a class="viewcode-back" href="../../dxss.html#dxss.space_time.SpaceTime">[docs]</a><span class="k">class</span> <span class="nc">SpaceTime</span><span class="p">:</span>
-    <span class="c1"># TODO:</span>
-    <span class="c1"># this is a *large class* (https://refactoring.guru/smells/large-class) with</span>
-    <span class="c1"># a *long parameter list* constructor</span>
-    <span class="c1"># (https://refactoring.guru/smells/long-parameter-list)</span>
+    <span class="c1"># TODO: this is a *large class*</span>
+    <span class="c1"># (https://refactoring.guru/smells/large-class) with a *long parameter list*</span>
+    <span class="c1"># constructor (https://refactoring.guru/smells/long-parameter-list)</span>
     <span class="c1">#</span>
     <span class="c1"># We can create intermediary data objects (where relevant) or split up some</span>
     <span class="c1"># of the configuration of this object.  Ideally we&#39;d also split up the</span>
@@ -440,7 +439,7 @@ document.write(`
         <span class="p">]</span>
 
         <span class="c1"># DG0 indicator function</span>
-        <span class="c1"># todo: could this be moved to the constructor of the dataclass?</span>
+        <span class="c1"># TODO: could this be moved to the constructor of the dataclass?</span>
         <span class="k">if</span> <span class="n">omega</span><span class="o">.</span><span class="n">fitted</span><span class="p">:</span>
             <span class="n">q_ind</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">FunctionSpace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msh</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;DG&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">omega</span><span class="o">.</span><span class="n">indicator_function</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">q_ind</span><span class="p">)</span>
@@ -521,7 +520,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_pts_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">otime</span><span class="o">.</span><span class="n">qstar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-15</span>  <span class="c1"># hack to trick form compiler</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-15</span>  <span class="c1"># small hack to trick form compiler</span>
 
         <span class="c1"># for coarse grid correction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">msh_coarse</span> <span class="o">=</span> <span class="kc">None</span>
