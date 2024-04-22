@@ -22,6 +22,11 @@ jobs:
         dolfinx-version:
           - "0.6"
           - "0.7"
+        exclude:
+          - dolfinx-version: "0.6"
+            python-version: "3.11"
+          - dolfinx-version: "0.6"
+            python-version: "3.12"
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
